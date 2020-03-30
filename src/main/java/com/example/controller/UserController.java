@@ -8,6 +8,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,15 +53,19 @@ public class UserController {
     }
 
     @GetMapping("profile")
-    public String getProfile(Model model, User user, HttpServletRequest servletRequest) {
+    public String getProfile(Model model, @AuthenticationPrincipal User user, HttpServletRequest servletRequest) {
         String clientIp = servletRequest.getRemoteAddr();
         TreeSet<String> zoneSet = new TreeSet<>(ZoneId.getAvailableZoneIds());
+        String selectedZone = (String)servletRequest.getSession().getAttribute("selectedZone");
+        if (selectedZone == null || StringUtils.isEmpty(selectedZone)) {
+            selectedZone = user.getTimezone();
+        }
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
         model.addAttribute("navbarProfile", true);
         model.addAttribute("availableZones", zoneSet);
         model.addAttribute("userIp", clientIp);
-        model.addAttribute("selectedZone", user.getTimezone());
+        model.addAttribute("selectedZone", selectedZone);
         return "profile";
     }
 
@@ -74,7 +79,7 @@ public class UserController {
             HttpSession session
     ) {
         userService.updateProfile(user, password, email, timeZone);
-        model.addAttribute("selectedZone", timeZone);
+        session.setAttribute("selectedZone", timeZone);
         return "redirect:/user/profile";
     }
 }
