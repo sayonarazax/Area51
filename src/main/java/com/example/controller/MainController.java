@@ -75,7 +75,6 @@ public class MainController {
             model.mergeAttributes(errorsMap);
             model.addAttribute(message);
         } else  {
-
             model.addAttribute("navbarMsg", true);
             model.addAttribute("message", null);
             messageRepo.save(message);

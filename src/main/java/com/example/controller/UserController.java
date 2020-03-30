@@ -66,6 +66,7 @@ public class UserController {
 
     @PostMapping("profile")
     public String updateProfile(
+            Model model,
             @AuthenticationPrincipal User user,
             @RequestParam String password,
             @RequestParam String email,
@@ -73,6 +74,7 @@ public class UserController {
             HttpSession session
     ) {
         userService.updateProfile(user, password, email, timeZone);
+        model.addAttribute("selectedZone", timeZone);
         return "redirect:/user/profile";
     }
 }
