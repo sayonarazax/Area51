@@ -3,5 +3,5 @@
 
 <@c.page>
     <h1>Hello, ${(user??)?string(name, 'Guest')}</h1>
-    <div>this the simple copy of twitter</div>
+    <div>this is the simple chat</div>
 </@c.page>
