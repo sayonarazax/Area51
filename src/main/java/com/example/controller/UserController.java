@@ -66,7 +66,7 @@ public class UserController {
 
     @PostMapping("profile")
     public String updateProfile(
-            @AuthenticationPrincipal @SessionAttribute("user") User user,
+            @AuthenticationPrincipal User user,
             @RequestParam String password,
             @RequestParam String email,
             @RequestParam String timeZone,
