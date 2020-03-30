@@ -55,7 +55,7 @@ public class MainController {
     }
 
     @PostMapping("/main")
-    public String add(@AuthenticationPrincipal @SessionAttribute("user") User author,
+    public String add(@AuthenticationPrincipal User author,
                       @Valid Message message,
                       BindingResult bindingResult,
                       Model model,
