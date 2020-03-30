@@ -31,6 +31,7 @@ public class User implements UserDetails {
     @Email(message = "Email is not correct")
     @NotBlank(message = "Email cannot be empty")
     private String email;
+
     private String activationCode;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
@@ -125,7 +126,7 @@ public class User implements UserDetails {
     }
 
     public String getTimezone() {
-        return timezone;
+        return this.timezone;
     }
 
     public void setTimezone(String timezone) {

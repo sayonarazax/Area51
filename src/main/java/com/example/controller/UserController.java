@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @GetMapping("profile")
-    public String getProfile(Model model, @AuthenticationPrincipal User user, HttpServletRequest servletRequest) {
+    public String getProfile(Model model, User user, HttpServletRequest servletRequest) {
         String clientIp = servletRequest.getRemoteAddr();
         TreeSet<String> zoneSet = new TreeSet<>(ZoneId.getAvailableZoneIds());
         model.addAttribute("username", user.getUsername());
@@ -60,6 +60,7 @@ public class UserController {
         model.addAttribute("navbarProfile", true);
         model.addAttribute("availableZones", zoneSet);
         model.addAttribute("userIp", clientIp);
+        model.addAttribute("selectedZone", user.getTimezone());
         return "profile";
     }
 
