@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @GetMapping("profile")
-    public String getProfile(Model model, @AuthenticationPrincipal User user, HttpServletRequest servletRequest) {
+    public String getProfile(Model model, @AuthenticationPrincipal @SessionAttribute("user") User user, HttpServletRequest servletRequest) {
         String clientIp = servletRequest.getRemoteAddr();
         TreeSet<String> zoneSet = new TreeSet<>(ZoneId.getAvailableZoneIds());
         model.addAttribute("username", user.getUsername());
@@ -66,12 +66,14 @@ public class UserController {
 
     @PostMapping("profile")
     public String updateProfile(
-            @AuthenticationPrincipal User user,
+            @AuthenticationPrincipal @SessionAttribute("user") User user,
             @RequestParam String password,
             @RequestParam String email,
-            @RequestParam String timeZone
+            @RequestParam String timeZone,
+            HttpSession session
     ) {
         userService.updateProfile(user, password, email, timeZone);
+        session.setAttribute("user", user);
         return "redirect:/user/profile";
     }
 }
