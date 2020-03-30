@@ -2,7 +2,7 @@
 <#import "login.ftlh" as l>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <img src="/img/ufoIco1.png" alt="">
+    <img src="https://b.radikal.ru/b40/2003/d8/e9e116002165.png" alt="">
     <a class="navbar-brand" href="/">Area51</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

@@ -31,8 +31,6 @@ public class MainController {
     @Autowired
     private MessageRepo messageRepo;
 
-    @Value("${upload.path}")
-    private String uploadPath;
 
     @GetMapping("/")
     public String greeting(Model model) {
@@ -77,19 +75,6 @@ public class MainController {
             model.mergeAttributes(errorsMap);
             model.addAttribute(message);
         } else  {
-            if (file != null && !file.getOriginalFilename().isEmpty()) {
-                File uploadDir = new File(uploadPath);
-                if(!uploadDir.exists()) {
-                    uploadDir.mkdir();
-                }
-
-                String uuidFile = UUID.randomUUID().toString();
-                String resultFilename = uuidFile + "." + file.getOriginalFilename();
-
-                file.transferTo(new File(uploadPath + "/" + resultFilename));
-
-                message.setFilename(resultFilename);
-            }
 
             model.addAttribute("navbarMsg", true);
             model.addAttribute("message", null);
