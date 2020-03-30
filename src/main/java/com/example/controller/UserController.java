@@ -56,16 +56,12 @@ public class UserController {
     public String getProfile(Model model, @AuthenticationPrincipal User user, HttpServletRequest servletRequest) {
         String clientIp = servletRequest.getRemoteAddr();
         TreeSet<String> zoneSet = new TreeSet<>(ZoneId.getAvailableZoneIds());
-        String selectedZone = (String)servletRequest.getSession().getAttribute("selectedZone");
-        if (selectedZone == null || StringUtils.isEmpty(selectedZone)) {
-            selectedZone = user.getTimezone();
-        }
         model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
         model.addAttribute("navbarProfile", true);
         model.addAttribute("availableZones", zoneSet);
         model.addAttribute("userIp", clientIp);
-        model.addAttribute("selectedZone", selectedZone);
+        model.addAttribute("selectedZone", user.getTimezone());
         return "profile";
     }
 
@@ -79,7 +75,7 @@ public class UserController {
             HttpSession session
     ) {
         userService.updateProfile(user, password, email, timeZone);
-        session.setAttribute("selectedZone", timeZone);
+        session.invalidate();
         return "redirect:/user/profile";
     }
 }
