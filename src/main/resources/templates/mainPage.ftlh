@@ -32,6 +32,12 @@
                     </#if>
                 </div>
                 <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" name="file" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div>
+                <div class="form-group">
                     <input type="hidden" name="_csrf" value="${_csrf.token}" />
                     <input type="hidden" value="<#if message??>${message.datemsg}</#if>" name="datemsg">
                     <div class="form-group">

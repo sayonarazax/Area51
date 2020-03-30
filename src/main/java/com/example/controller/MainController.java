@@ -58,9 +58,10 @@ public class MainController {
     public String add(@AuthenticationPrincipal User author,
                       @Valid Message message,
                       BindingResult bindingResult,
-                      Model model
+                      Model model,
+                      @RequestParam("file") MultipartFile file
 
-    )  {
+    ) throws IOException {
         message.setAuthor(author);
         if(!StringUtils.isEmpty(author.getTimezone())) {
             ZoneId zoneId = ZoneId.of(author.getTimezone());
