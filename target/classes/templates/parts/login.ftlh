@@ -43,7 +43,7 @@
             <label class="col-sm-2 col-form-label">Email:</label>
             <div class="col-sm-6">
                 <input type="email" name="email" class="form-control ${(emailError??)?string('is-invalid', '')}"
-                       placeholder="some@some.com"  value="<#if user??>${user.email}</#if>"/>
+                       placeholder="some@some.com" />
                 <#if emailError??>
                     <div class="invalid-feedback">
                         ${emailError}
@@ -52,7 +52,7 @@
             </div>
         </div>
             <div class="col-sm-6">
-            <div class="g-recaptcha" data-sitekey="6LcHRuMUAAAAAL_LyizG9WobXhj4QdXBcOTh4Sos"></div>
+            <div class="g-recaptcha" data-sitekey="6LdMOuUUAAAAACg85ccSKmNF35w9j5IOxpyny2gX"></div>
                 <#if captchaError??>
                     <div class="alert alert-danger" role="alert">
                         ${captchaError}

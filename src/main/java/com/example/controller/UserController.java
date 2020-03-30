@@ -69,11 +69,9 @@ public class UserController {
             @AuthenticationPrincipal User user,
             @RequestParam String password,
             @RequestParam String email,
-            @RequestParam String timeZone,
-            HttpSession session
+            @RequestParam String timeZone
     ) {
         userService.updateProfile(user, password, email, timeZone);
-        session.setAttribute("user", user);
         return "redirect:/user/profile";
     }
 }
