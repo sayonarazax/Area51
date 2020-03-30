@@ -43,7 +43,7 @@
             <label class="col-sm-2 col-form-label">Email:</label>
             <div class="col-sm-6">
                 <input type="email" name="email" class="form-control ${(emailError??)?string('is-invalid', '')}"
-                       placeholder="some@some.com"  value="<#if user??>${user.email}</#if>"/>
+                       placeholder="some@some.com" />
                 <#if emailError??>
                     <div class="invalid-feedback">
                         ${emailError}

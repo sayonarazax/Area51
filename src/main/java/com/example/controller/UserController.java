@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @GetMapping("profile")
-    public String getProfile(Model model, @AuthenticationPrincipal @SessionAttribute("user") User user, HttpServletRequest servletRequest) {
+    public String getProfile(Model model, @AuthenticationPrincipal User user, HttpServletRequest servletRequest) {
         String clientIp = servletRequest.getRemoteAddr();
         TreeSet<String> zoneSet = new TreeSet<>(ZoneId.getAvailableZoneIds());
         model.addAttribute("username", user.getUsername());
