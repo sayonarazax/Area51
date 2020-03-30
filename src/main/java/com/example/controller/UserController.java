@@ -60,7 +60,6 @@ public class UserController {
         model.addAttribute("navbarProfile", true);
         model.addAttribute("availableZones", zoneSet);
         model.addAttribute("userIp", clientIp);
-        model.addAttribute("selectedZone", user.getTimezone());
         return "profile";
     }
 
