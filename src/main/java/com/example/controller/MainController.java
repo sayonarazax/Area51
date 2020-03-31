@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.domain.Message;
 import com.example.domain.User;
 import com.example.repo.MessageRepo;
+import com.example.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
@@ -33,6 +34,10 @@ public class MainController {
     @Lazy
     @Autowired
     private MessageRepo messageRepo;
+
+    @Lazy
+    @Autowired
+    private UserRepo userRepo;
 
 
     @GetMapping("/")
@@ -66,10 +71,10 @@ public class MainController {
     )  {
         message.setAuthor(author);
         if(!StringUtils.isEmpty(author.getTimezone())) {
-            ZoneId zoneId = ZoneId.of(author.getTimezone());
+            ZoneId zoneId = ZoneId.of(userRepo.findByUsername(author.getUsername()).getTimezone());
             Instant msgTime = Instant.now();;
             ZonedDateTime zonedDate = ZonedDateTime.ofInstant(msgTime, zoneId);
-            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("MM.dd - HH:mm z");
+            DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("dd.MM - HH:mm z");
             message.setDatemsg(zonedDate.format(formatter2));
         }
         if (bindingResult.hasErrors()) {
