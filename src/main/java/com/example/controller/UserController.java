@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.domain.Role;
 import com.example.domain.User;
+import com.example.repo.UserRepo;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +22,9 @@ import java.util.TreeSet;
 @RequestMapping("/user")
 @SessionAttributes(value = "user")
 public class UserController {
+    @Autowired
+    private UserRepo userRepo;
+
     @Autowired
     private UserService userService;
 
@@ -61,7 +65,7 @@ public class UserController {
         model.addAttribute("navbarProfile", true);
         model.addAttribute("availableZones", zoneSet);
         model.addAttribute("userIp", clientIp);
-        model.addAttribute("selectedZone", user.getTimezone());
+        model.addAttribute("selectedZone", userRepo.findByUsername(user.getUsername()).getTimezone());
         return "profile";
     }
 
@@ -70,8 +74,7 @@ public class UserController {
             @AuthenticationPrincipal User user,
             @RequestParam String password,
             @RequestParam String email,
-            @RequestParam String timeZone,
-            HttpSession session
+            @RequestParam String timeZone
     ) {
         userService.updateProfile(user, password, email, timeZone);
         return "redirect:/user/profile";

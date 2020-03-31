@@ -1,5 +1,6 @@
 <#import "parts/common.ftlh" as c>
 <#import "parts/login.ftlh" as l>
+<#include "parts/security.ftlh">
 
 <@c.page>
     <h1>${username}</h1>
@@ -27,7 +28,7 @@
           </div>
           <select class="custom-select" id="inputGroupSelect01" name="timeZone">
             <#list availableZones as zoneId>
-                <option <#if selectedZone??>${(selectedZone == zoneId)?string('selected', '')}</#if> value="${zoneId}">${zoneId}</option>
+                <option <#if selectedZone??>${(selectedZone == zoneId)?string('selected', '')}<#else>${(user.timezone == zoneId)?string('selected', '')}</#if> value="${zoneId}">${zoneId}</option>
             </#list>
           </select>
         </div>

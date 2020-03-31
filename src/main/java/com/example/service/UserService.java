@@ -4,6 +4,7 @@ import com.example.domain.Role;
 import com.example.domain.User;
 import com.example.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,6 +36,7 @@ public class UserService implements UserDetailsService {
 
         return user;
     }
+
 
     public boolean addUser(User user) {
         User userFromDb = userRepo.findByUsername(user.getUsername());
@@ -100,7 +102,7 @@ public class UserService implements UserDetailsService {
         userRepo.save(user);
     }
 
-    public void updateProfile(User user, String password, String email, String timeZone) {
+    public void updateProfile(@AuthenticationPrincipal User user, String password, String email, String timeZone) {
         String userEmail = user.getEmail();
 
         boolean emailIsChanged = (email != null && !email.equals(userEmail)) ||

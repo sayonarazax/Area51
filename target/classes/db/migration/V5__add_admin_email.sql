@@ -1,0 +1,1 @@
+update usr set email = 'area51chatbot@gmail.com' where id = 1;

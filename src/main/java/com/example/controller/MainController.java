@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -58,10 +59,9 @@ public class MainController {
     public String add(@AuthenticationPrincipal User author,
                       @Valid Message message,
                       BindingResult bindingResult,
-                      Model model,
-                      @RequestParam("file") MultipartFile file
+                      Model model
 
-    ) throws IOException {
+    )  {
         message.setAuthor(author);
         if(!StringUtils.isEmpty(author.getTimezone())) {
             ZoneId zoneId = ZoneId.of(author.getTimezone());
@@ -75,6 +75,7 @@ public class MainController {
             model.mergeAttributes(errorsMap);
             model.addAttribute(message);
         } else  {
+
             model.addAttribute("navbarMsg", true);
             model.addAttribute("message", null);
             messageRepo.save(message);

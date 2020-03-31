@@ -25,6 +25,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column(name = "timezone")
+    @Basic(fetch = FetchType.LAZY)
     private String timezone;
 
     private boolean active;
