@@ -5,6 +5,7 @@ import com.example.domain.User;
 import com.example.repo.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ import java.util.UUID;
 
 @Controller
 public class MainController {
+    @Lazy
     @Autowired
     private MessageRepo messageRepo;
 

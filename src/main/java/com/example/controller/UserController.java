@@ -5,6 +5,7 @@ import com.example.domain.User;
 import com.example.repo.UserRepo;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class UserController {
     @Autowired
     private UserRepo userRepo;
 
+    @Lazy
     @Autowired
     private UserService userService;
 
